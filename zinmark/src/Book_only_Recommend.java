@@ -153,7 +153,6 @@ class Book_only_Recommend {
         System.out.format("%10s", "book score");
         System.out.format("%10s", "add  score");
 
-        boolean ctr = true;
                 
         List<Entry<Integer, MyBook>> book_list = new ArrayList<Entry<Integer,MyBook>>(books.entrySet());
 

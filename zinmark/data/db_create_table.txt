@@ -1,0 +1,31 @@
+CREATE table url(id int primary key, url text);
+
+insert into url (id, url) values (1,'algorithm.html');
+insert into url (id, url) values (2,'sort.html');
+insert into url (id, url) values (3,'search.html');
+insert into url (id, url) values (4,'data.html');
+insert into url (id, url) values (5,'graph.html');
+
+
+create table word(id int primary key, word text);
+
+insert into word (id, word) values (1,'program');
+insert into word (id, word) values (2,"algorithm");
+insert into word (id, word) values (3,"data");
+insert into word (id, word) values (4,"structure");
+insert into word (id, word) values (5,"sort");
+insert into word (id, word) values (6,"merge");
+insert into word (id, word) values (7,"array");
+insert into word (id, word) values (8,"binary");
+insert into word (id, word) values (9,"list");
+insert into word (id, word) values (10,"queue");
+insert into word (id, word) values (11,"stack");
+insert into word (id, word) values (12,"bfs");
+insert into word (id, word) values (13,"dfs");
+insert into word (id, word) values (14,"node");
+insert into word (id, word) values (15,"edge");
+
+
+
+create table link(souce int, target int);
+create table location(word_id int ,url_id int);
