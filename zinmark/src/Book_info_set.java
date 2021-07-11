@@ -157,7 +157,7 @@ class Book_info_set {
         try {
             result = statement.executeQuery(sql);
             while (result.next()) {
-                set_reference_book(result.getInt("souce"), result.getInt("target") );
+                set_reference_book(result.getInt("source"), result.getInt("target") );
             }
         } catch (SQLException e) {
             e.printStackTrace();
