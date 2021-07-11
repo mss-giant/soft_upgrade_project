@@ -20,9 +20,9 @@ class MyBook implements Comparable<MyBook>{
 
 
     MyBook(int id, String book_name,String page_name){
-        this.book_id = book_id;
+        this.book_id = id;
         this.book_name = book_name;
-        this.my_page = my_page;
+        this.my_page = page_name;
         this.book_score = 1.0;
         this.book_score_0_1 = 0.0;
         this.word_score = 0.0;
@@ -133,6 +133,9 @@ class MyBook implements Comparable<MyBook>{
         return word_list.contains(word);
     }
 
+    public ArrayList<String> get_book_has_word_list(){
+        return this.word_list;
+    }
 
     @Override
     public int compareTo(MyBook other_book){
