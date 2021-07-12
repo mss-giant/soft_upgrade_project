@@ -1,10 +1,11 @@
+package DB_Setting_tool;
+
 import java.io.File;
 import java.util.ArrayList;
-//import java.util.LinkedList;
 
-class Scan_data_csvfile {
-    //LinkedList<File> file_list = new LinkedList<>();
-    ArrayList<File> file_list = new ArrayList<File>();
+
+public class Scan_data_csvfile {
+    private ArrayList<File> file_list = new ArrayList<File>();
 
     /**
      * ディレクトリを再帰的に読む
@@ -38,6 +39,11 @@ class Scan_data_csvfile {
           file_list.add(file);
         }
       }
+    }
+
+    //ディレクトリ内のファイルのリストを返す
+    public ArrayList<File> get_file_list(){
+      return file_list;
     }
   
 }

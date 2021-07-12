@@ -2,3 +2,7 @@ CREATE table url ("id" int primary key, "url" text);
 create table word ("id" int primary key, "word" text);
 create table link ("souce" int, "target" int);
 create table location ("word_id" int ,"url_id" int);
+
+create table user_name ("id" int primary key, "name" text);
+create table friend ("user_a" int , "user_b" int);
+create table score ("user_id" int,"book_id" int,"score" float);
