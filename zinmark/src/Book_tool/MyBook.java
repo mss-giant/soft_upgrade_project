@@ -1,7 +1,9 @@
+package src.Book_tool;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
-class MyBook implements Comparable<MyBook>{
+public class MyBook implements Comparable<MyBook>{
     //new new new new new new new 
     private int book_id;                //bookid
     private String my_page;
@@ -19,7 +21,7 @@ class MyBook implements Comparable<MyBook>{
     private ArrayList<String> word_list;
 
 
-    MyBook(int id, String book_name,String page_name){
+    public MyBook(int id, String book_name,String page_name){
         this.book_id = id;
         this.book_name = book_name;
         this.my_page = page_name;

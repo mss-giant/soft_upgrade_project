@@ -1,6 +1,10 @@
+package src;
+import src.Book_tool.*;
+
+
 public class test_set {
     public static void main(String[] args) {
-        Book_info_set bis = new Book_info_set();
+        Book_controller bis = new Book_controller();
         Book_only_Recommend bos = new Book_only_Recommend();
         bis.set_database_info("jdbc:postgresql://localhost:5432/zinmark_db", "zinmark", "zinpass");
         bis.connect_and_select_data("url"); 

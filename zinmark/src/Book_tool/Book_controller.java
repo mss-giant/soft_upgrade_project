@@ -1,3 +1,5 @@
+package src.Book_tool;
+
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 
 
 
-class Book_info_set {
+public class Book_controller {
     private Connection connection = null;
     private Statement statement = null;
     private ResultSet result = null;
@@ -25,7 +27,7 @@ class Book_info_set {
     private Map<Integer,MyBook> books = new HashMap<Integer, MyBook>();
 
 
-    Book_info_set(){
+    public Book_controller(){
         
     }
 
@@ -126,22 +128,6 @@ class Book_info_set {
         try {
             result = statement.executeQuery(sql);
             while (result.next()) {
-                //for(int i=1;i<=result.getMetaData().getColumnCount();i++){
-                //    //System.out.print(" "+result.getMetaData().getColumnLabel(i+1)+" : ");
-                //    if(result.getMetaData().getColumnName(i).equals("id")){
-                //        book_id = result.getInt(i);
-                //        //System.out.print(int_data);
-                //    }
-                //    else if(result.getMetaData().getColumnName(i).equals("url")){
-                //        my_page = result.getString(i);
-                //        //System.out.print(string_data);
-                //    }
-                //    //System.out.print((result.getMetaData().getColumnLabel(i+1).equals(columns[i]))) ;
-                //    //System.out.print(new String("id").hashCode());
-                //    //System.out.format("%12s", result.getObject(i+1).getClass().getName());
-                //}
-
-                //System.out.println(result.getInt("id") + " "+ result.getString("url"));
                 set_book_info(result.getInt("id"),new String(Character.toChars(result.getInt("id")+64)), result.getString("url"));
                 
             }

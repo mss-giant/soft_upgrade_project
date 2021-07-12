@@ -1,3 +1,5 @@
+package src.Book_tool;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -6,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-class Book_only_Recommend {
+public class Book_only_Recommend {
     private int K=20;
     private double max_book_score;
     private double max_word_score;
@@ -18,7 +20,7 @@ class Book_only_Recommend {
 
     private ArrayList<String> serch_word_list;
 
-    Book_only_Recommend(){
+    public Book_only_Recommend(){
         this.books = new HashMap<Integer,MyBook>();
         this.pre_book_scores =new HashMap<MyBook,Double>();
         this.new_book_scores = new HashMap<MyBook,Double>();
