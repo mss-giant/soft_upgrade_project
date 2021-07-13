@@ -31,8 +31,8 @@ public class SimilarScore {
 
 
     SimilarScore(){
-        //u1 = new User();
-        //u2 = new User();
+        u1 = new User();
+        u2 = new User();
     }
     
     //計算するユーザーをセット
@@ -51,8 +51,8 @@ public class SimilarScore {
     //ある本に対して、お互いに評価しているときのみ、ユーザー間を計算する
     public void calculate_dist(){
             for(Integer key : u1.book_score.keySet()){
-                if(u2.check_have_book(key)){
-                    this.dist = (u1.get_bookscore(key) - u2.get_bookscore(key));
+                if(u2.check_have_key(key)){
+                    this.dist = (u1.get_BookScore(key) - u2.get_BookScore(key));
                     this.add_dist(this.dist*this.dist);
                     //計算したが判定
                     this.cal_check = true;
@@ -77,7 +77,7 @@ public class SimilarScore {
 
     //計算しているユーザーを呼び出す　テスト時のみ使用
     public String get_users_name(){
-        return "User1:"+u1.get_Name()+" User2:"+u2.get_Name();
+        return "User1:"+u1.get_UserName()+" User2:"+u2.get_UserName();
     }
 
     //今計算しているユーザーが正しいか確認　テスト時のみ使用

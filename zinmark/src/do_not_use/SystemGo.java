@@ -30,7 +30,7 @@ class SystemGo {
         user = new User[10000];
         scan_ctr = true;
         target_user = target_u;
-        user[0] = new User(0,"unknow");       //user[0]は存在しない
+        user[0] = new User();       //user[0]は存在しない
         this.SettingData();
         this.cal_Similar_score();
         this.ScanFriendInfo();
@@ -52,7 +52,7 @@ class SystemGo {
 
             for(int i=1;i<=N;i++){
                 user[i] = new User();
-                user[i].set_User_Name(i);
+                user[i].set_UserName(i);
             }
 
             for(int i=1;i<=E;i++){

@@ -13,8 +13,7 @@ import java.util.Comparator;
 
 
 class User {
-    private int id;
-    private String user_name;                                          //ユーザの名前を番号で管理　入力の値と一致している
+    private int user_name;                                          //ユーザの名前を番号で管理　入力の値と一致している
     Map<Integer,Double> book_score = new HashMap<>();               //自分が評価した本と評価値を管理
     Map<User,Double> similar_opponent_score = new HashMap<>();      //他人とその人との類似度を管理
     Map<Integer,Double> rec_book_score = new HashMap<>();           //自分に対し、推薦された本の番号と、その推薦度を管理
@@ -24,83 +23,41 @@ class User {
     
     private int myrank = 0;                                         //自分のランク　子をいくつ持つか　友人関係で使用
     
-    
-    //userの情報をset
-    User(int id, String user_name){
-        this.id = id;
-        this.user_name = user_name;
+    User(){
     }
 
-
-    //replace user info
-    public void replace_info(int id, String user_name){
-        this.id = id;
+    //userの名前を記録　入力通りの数字を使用
+    public void set_UserName(int user_name){
         this.user_name = user_name;
-    }
-
-    //userのidを返す
-    public int get_id(){
-        return this.id;
     }
 
     //userの名前を返す
-    public String get_Name(){
+    public int get_UserName(){
         return this.user_name;
     }
 
 
-
-
     //自分が評価した本とその評価値を記録
-    public void set_bookscore(int book_id, double score){
-        book_score.put(book_id, score);
+    public void set_BookScore(int book_number,double score){
+        if(score>0.0){
+            this.book_score.put(book_number, score);
+        }
     }
 
-    public void replace_bookscore(int book_id,double score){
-        book_score.put(book_id, score);
-    }
-
-    public double get_bookscore(int book_id){
-        if(book_score.containsKey(book_id)){
-            return book_score.get(book_id);
+    //本の番号を受け取り、その本の評価を返す
+    public double get_BookScore(int booknum){
+        if(this.check_have_key(booknum)){
+            return this.book_score.get(booknum);
         }
         else{
-            return -1.0;
+            return -2.0;
         }
     }
-
-
-        //自分との友人を設定
-    public void set_User_friends(User u, boolean friend_check){
-        this.friends_map.put(u, friend_check);
-    }
-
-    public void replace_User_friends(User u, boolean friend_check){
-        this.friends_map.put(u, friend_check);
-    }
-
-
-        //友人かどうか判定
-    public boolean check_User_friends(User u){
-        if(this.friends_map.containsKey(u)){
-            return friends_map.get(u);
-        }
-        else{
-            return false;
-        }
-    }
-
-
-
-
-
-
-
 
     //自らが評価した本とその評価値を出力する
     //friend も出力ここで
     public void disp_book_score(User target,int how_many_book){
-        System.out.print("U" + (this.get_Name())+"  ");
+        System.out.print("U" + (this.get_UserName())+"  ");
         if(!this.equals(target)){
             System.out.print(String.format("%.2f",this.get_similar_opponent_score(target)));
         }
@@ -108,8 +65,8 @@ class User {
             System.out.print("----");
         }
         for(int j=1;j<=how_many_book;j++){
-            if(this.check_have_book(j)){
-                System.out.print("  "+this.get_bookscore(j)+" ");
+            if(this.check_have_key(j)){
+                System.out.print("  "+this.get_BookScore(j)+" ");
             }
             else{
                 System.out.print("  --- ");
@@ -122,7 +79,7 @@ class User {
 
 
     //引数として受け取った番号の本を評価しているかtrue falseで返す
-    public boolean check_have_book(int booknum){
+    public boolean check_have_key(int booknum){
         if(this.book_score.containsKey(booknum)){
             return true;
         }
@@ -170,6 +127,9 @@ class User {
         }
 
     }
+
+
+
 
 
 
@@ -230,9 +190,20 @@ class User {
 
     //以下改良部分　課題5を利用するため　以下のメソッドを追加した
 
+    //自分との友人を設定
+    public void set_User_friends(User u, boolean friend_check){
+        this.friends_map.put(u, friend_check);
+    }
 
-
-
+    //友人かどうか判定
+    public boolean check_User_friends(User u){
+        if(this.friends_map.containsKey(u)){
+            return friends_map.get(u);
+        }
+        else{
+            return false;
+        }
+    }
 
     //友人かどうか出力
     public void disp_friend(User target){

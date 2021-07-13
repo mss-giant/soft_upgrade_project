@@ -12,7 +12,7 @@ class Book_Recommendation {
 
 
     Book_Recommendation(){
-        //target_user = new User();
+        target_user = new User();
         number_of_books = 0;
         users = new ArrayList<User>();
         rec_book_score = new HashMap<>();
@@ -43,13 +43,13 @@ class Book_Recommendation {
     //　友人の時だけ推薦度を計算
     public void cal_rec_score(){
         for(int b=1;b<=this.number_of_books;b++){
-            if(!target_user.check_have_book(b)){
+            if(!target_user.check_have_key(b)){
                 for(User u_opponent : users){
                     if(target_user!=u_opponent){
                         // friend userの時だけ格納
                         if(target_user.check_User_friends(u_opponent)){
-                            if(u_opponent.check_have_book(b)){
-                                double rec_score = u_opponent.get_bookscore(b) * this.target_user.get_similar_opponent_score(u_opponent);
+                            if(u_opponent.check_have_key(b)){
+                                double rec_score = u_opponent.get_BookScore(b) * this.target_user.get_similar_opponent_score(u_opponent);
                                 add_rec_book_score(b, rec_score);
                                 add_all_user_similar_score(b, this.target_user.get_similar_opponent_score(u_opponent));
                             }
