@@ -1,3 +1,6 @@
+package src;
+import src.User_tool.*;
+
 public class test_user_set {
     public static void main(String[] args) {
         User_controller u_ctr = new User_controller();
@@ -8,7 +11,7 @@ public class test_user_set {
         u_ctr.connect_and_select_data("friend");
 
         User_only_Recommendation u_rec = new User_only_Recommendation(u_ctr.get_users());
-        int target_user_id = 3;
+        int target_user_id = 1;
         u_rec.set_number_of_books(5);
         u_rec.cal_Similar_score();
         u_rec.set_friend_of_friend();

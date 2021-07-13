@@ -1,3 +1,7 @@
+package src.User_tool;
+
+
+
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -33,7 +37,7 @@ class User {
 
 
     //replace user info
-    public void replace_info(int id, String user_name){
+    public void update_info(int id, String user_name){
         this.id = id;
         this.user_name = user_name;
     }
@@ -56,7 +60,7 @@ class User {
         book_score.put(book_id, score);
     }
 
-    public void replace_bookscore(int book_id,double score){
+    public void update_bookscore(int book_id,double score){
         book_score.put(book_id, score);
     }
 
@@ -75,7 +79,7 @@ class User {
         this.friends_map.put(u, friend_check);
     }
 
-    public void replace_User_friends(User u, boolean friend_check){
+    public void update_User_friends(User u, boolean friend_check){
         this.friends_map.put(u, friend_check);
     }
 

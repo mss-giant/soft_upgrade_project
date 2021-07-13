@@ -1,4 +1,4 @@
-package DB_Setting_tool;
+package src.DB_Setting_tool;
 
 import java.io.BufferedReader;
 import java.io.File;

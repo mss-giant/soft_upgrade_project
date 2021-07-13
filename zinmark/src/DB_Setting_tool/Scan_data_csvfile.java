@@ -1,4 +1,4 @@
-package DB_Setting_tool;
+package src.DB_Setting_tool;
 
 import java.io.File;
 import java.util.ArrayList;

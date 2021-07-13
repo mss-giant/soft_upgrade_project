@@ -1,3 +1,6 @@
+package src.User_tool;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +9,7 @@ class Book_Recommendation {
 
     private User target_user ;                     //ターゲットユーザー　推薦する対象
     private int number_of_books ;                  //本の数を設定
-    Map<Integer,User> users ;                        //全ユーザーを格納
+    private Map<Integer,User> users ;                        //全ユーザーを格納
     Map<Integer,Double> rec_book_score ;           //本の番号に対応する推薦度を格納
     Map<Integer,Double> all_user_similar_score ;   //推薦する本に対し、他のユーザーの類似度を合計する
 
@@ -45,7 +48,7 @@ class Book_Recommendation {
         for(int b=1;b<=this.number_of_books;b++){
             if(!target_user.check_have_book(b)){
                 for(User u_opponent : users.values()){
-                    if(target_user!=u_opponent){
+                    if(!target_user.equals(u_opponent)){
                         // friend userの時だけ格納
                         if(target_user.check_User_friends(u_opponent)){
                             if(u_opponent.check_have_book(b)){

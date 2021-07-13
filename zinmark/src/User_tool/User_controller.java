@@ -1,3 +1,5 @@
+package src.User_tool;
+
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +40,7 @@ public class User_controller {
         }
     }
 
-    public void replace_User_info(int id, String name){
+    public void update_User_info(int id, String name){
         //deve
     }
 
@@ -47,7 +49,7 @@ public class User_controller {
         users.get(user_id).set_bookscore(book_id, score);
     }
 
-    public void replace_User_bookscore(int user_id, int book_id, double new_score){
+    public void update_User_bookscore(int user_id, int book_id, double new_score){
         //dev
     }
 
