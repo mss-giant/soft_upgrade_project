@@ -3,8 +3,8 @@ import java.util.Map;
 import java.lang.Math;
 
 public class SimilarScore {
-    User u1;
-    User u2;
+    private User u1;
+    private User u2;
 
     /*計算イメージ
 
@@ -50,9 +50,9 @@ public class SimilarScore {
 
     //ある本に対して、お互いに評価しているときのみ、ユーザー間を計算する
     public void calculate_dist(){
-            for(Integer key : u1.book_score.keySet()){
-                if(u2.check_have_book(key)){
-                    this.dist = (u1.get_bookscore(key) - u2.get_bookscore(key));
+            for(Integer book_id : u1.book_score.keySet()){
+                if(u2.check_have_book(book_id)){
+                    this.dist = (u1.get_bookscore(book_id) - u2.get_bookscore(book_id));
                     this.add_dist(this.dist*this.dist);
                     //計算したが判定
                     this.cal_check = true;

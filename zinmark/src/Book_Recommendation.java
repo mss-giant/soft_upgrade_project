@@ -6,7 +6,7 @@ class Book_Recommendation {
 
     private User target_user ;                     //ターゲットユーザー　推薦する対象
     private int number_of_books ;                  //本の数を設定
-    ArrayList<User> users ;                        //全ユーザーを格納
+    Map<Integer,User> users ;                        //全ユーザーを格納
     Map<Integer,Double> rec_book_score ;           //本の番号に対応する推薦度を格納
     Map<Integer,Double> all_user_similar_score ;   //推薦する本に対し、他のユーザーの類似度を合計する
 
@@ -14,15 +14,15 @@ class Book_Recommendation {
     Book_Recommendation(){
         //target_user = new User();
         number_of_books = 0;
-        users = new ArrayList<User>();
+        //users = new ArrayList<User>();
         rec_book_score = new HashMap<>();
         all_user_similar_score = new HashMap<>();
 
     }
 
     //ユーザーをセット
-    public void set_user(User U){
-        users.add(U);
+    public void set_users(Map<Integer,User> users){
+        this.users = users;
     }
 
     //ターゲットユーザーをセット
@@ -44,7 +44,7 @@ class Book_Recommendation {
     public void cal_rec_score(){
         for(int b=1;b<=this.number_of_books;b++){
             if(!target_user.check_have_book(b)){
-                for(User u_opponent : users){
+                for(User u_opponent : users.values()){
                     if(target_user!=u_opponent){
                         // friend userの時だけ格納
                         if(target_user.check_User_friends(u_opponent)){

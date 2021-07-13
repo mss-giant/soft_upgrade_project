@@ -79,6 +79,9 @@ class User {
         this.friends_map.put(u, friend_check);
     }
 
+    public Map<User,Boolean> get_User_friends(){
+        return this.friends_map;
+    }
 
         //友人かどうか判定
     public boolean check_User_friends(User u){
@@ -100,7 +103,9 @@ class User {
     //自らが評価した本とその評価値を出力する
     //friend も出力ここで
     public void disp_book_score(User target,int how_many_book){
-        System.out.print("U" + (this.get_Name())+"  ");
+        //System.out.print("U" + (this.get_Name())+"  ");
+        System.out.format("%8s", this.get_Name());
+        System.out.print("  ");
         if(!this.equals(target)){
             System.out.print(String.format("%.2f",this.get_similar_opponent_score(target)));
         }
