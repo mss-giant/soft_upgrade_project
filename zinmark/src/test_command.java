@@ -18,14 +18,23 @@ public class test_command {
             if(scan_cmd.get_rec_user_book_call()){
                 System.out.println("rec user book call");
             }
+            if(scan_cmd.get_rec_book_call()){
+                System.out.println("rec book call");
+            }
             if(scan_cmd.get_add_user_call()){
                 System.out.println("add user call");
+            }
+            if(scan_cmd.get_add_user_friend_call()){
+                System.out.println("add user friend call");
             }
             if(scan_cmd.get_add_user_book_score_call()){
                 System.out.println("add user book score call");
             }
             if(scan_cmd.get_add_book_call()){
                 System.out.println("add book call");
+            }
+            if(scan_cmd.get_add_book_word_call()){
+                System.out.println("add book word call");
             }
             if(scan_cmd.get_update_user_name_call()){
 
@@ -49,7 +58,10 @@ public class test_command {
                 System.out.println();
             }
         
-        
+            for(int i=0;i<40;i++){
+                System.out.print("__");
+            }
+            System.out.println();
         }
     }
 }

@@ -13,10 +13,13 @@ public class Command_Scanner {
 
     private boolean rec_user_call;
     private boolean rec_user_book_call;
+    private boolean rec_book_call;
 
     private boolean add_user_call;
-    private boolean add_user_book_score;
+    private boolean add_user_book_score_call;
+    private boolean add_user_friend_call;
     private boolean add_book_call;
+    private boolean add_book_word_call;
 
     private boolean update_user_name_call;
     private boolean update_user_book_score_call;    //eval
@@ -83,22 +86,29 @@ public class Command_Scanner {
         if (!command_found) {
             System.out.println("error : not found command");
         }
-        System.out.println();
     }
 
     public void reset_all_call() {
         display_user_info_call = false;
         display_book_info_call = false;
+
         rec_user_call = false;
         rec_user_book_call = false;
+        rec_book_call = false;
+
         add_user_call = false;
-        add_user_book_score = false;
+        add_user_book_score_call = false;
+        add_user_friend_call=false;
         add_book_call = false;
+        add_book_word_call = false;
+
         update_user_name_call = false;
         update_user_book_score_call = false;
         update_book_name_call = false;
+
         delete_user_call = false;
         delete_book_call = false;
+        
         search_mode_call = false;
         help_call = false;
         exit_call = false;
@@ -110,17 +120,26 @@ public class Command_Scanner {
 
     // display command
     public void display_command_controller(String[] command) {
-        if (command.length >= 2) {
-            if (command[1].equals("-u")) {
-                display_user_info_call = true;
-            } else if (command[1].equals("-b")) {
-                display_book_info_call = true;
-            } else {
-                System.out.println("error : not found opition");
+        if(command.length==3 && command[1].equals("-u")){
+            if(command[2].matches("^[0-9]+$")){
+                this.display_user_info_call=true;
+                command_input_data.put("user_id", command[2]);
+            }
+            else{
+                System.out.println("error : please input integer");
+            }
+        }
+        else if(command.length==3 && command[1].equals("-b")){
+            if(command[2].matches("^[0-9]+$")){
+                this.delete_book_call = true;
+                command_input_data.put("book_id", command[2]);
+            }
+            else{
+                System.out.println("error : please input integer");
             }
         }
         else{
-            System.out.println("not found opition");
+            System.out.println("error : sytax error or not found option");
         }
     }
 
@@ -145,6 +164,9 @@ public class Command_Scanner {
             }
             
         }
+        else if(command.length==2 && command[1].equals("-b")){
+            this.rec_book_call = true;
+        }
         else{
             System.out.println("error : sytax error or not found option");
         }
@@ -161,10 +183,9 @@ public class Command_Scanner {
                 System.out.println("error : please input alphabet of number");
             }
         }
-        //add -u 1 -b 1 -s 5.0
         else if(command.length==7 && command[1].equals("-u") && command[3].equals("-b") && command[5].equals("-s")){
             if(command[2].matches("^[0-9]+$") && command[4].matches("^[0-9]+$") && command[6].matches("^-?(0|[1-9]\\d*)(\\.\\d+|)$")){
-                this.add_user_book_score = true;
+                this.add_user_book_score_call = true;
                 command_input_data.put("user_id", command[2]);
                 command_input_data.put("book_id", command[4]);
                 command_input_data.put("score", command[6]);
@@ -172,6 +193,13 @@ public class Command_Scanner {
             }
             else{
                 System.out.println("error : please input correct value");
+            }
+        }
+        else if(command.length==5 && command[1].equals("-u") && command[3].equals("-f")){
+            if(command[2].matches("^[0-9]+$") && command[4].matches("^[0-9]+$")){
+                this.add_user_friend_call = true;
+                command_input_data.put("user_id", command[2]);
+                command_input_data.put("user_id", command[4]);
             }
         }
         else if (command.length==4 && command[1].equals("-b")){
@@ -184,6 +212,16 @@ public class Command_Scanner {
             }
             else{
                 System.out.println("error : please input correct URL");
+            }
+        }
+        else if(command.length==5 && command[1].equals("-b") && command[3].equals("-w")){
+            if(command[2].matches("^[0-9]+$") && command[4].matches("^[0-9]+$")){
+                this.add_book_word_call=true;
+                command_input_data.put("book_id", command[2]);
+                command_input_data.put("word_id", command[4]);
+            }
+            else{
+                System.out.println("error : please input integer");
             }
         }
         else{
@@ -288,6 +326,9 @@ public class Command_Scanner {
         return this.rec_user_book_call;
     }
 
+    public boolean get_rec_book_call(){
+        return this.rec_book_call;
+    }
 
 
     // add command
@@ -296,11 +337,19 @@ public class Command_Scanner {
     }
 
     public boolean get_add_user_book_score_call(){
-        return this.add_user_book_score;
+        return this.add_user_book_score_call;
+    }
+
+    public boolean get_add_user_friend_call(){
+        return this.add_user_friend_call;
     }
 
     public boolean get_add_book_call() {
         return this.add_book_call;
+    }
+
+    public boolean get_add_book_word_call(){
+        return this.add_book_word_call;
     }
 
     // update command
@@ -344,28 +393,37 @@ public class Command_Scanner {
 
 
     public void disp_help_command_list(){
-        System.out.println("********command list********");
-        System.out.printf("%-50s"," display -u");
+        System.out.println("********************command list********************");
+        System.out.printf("%-50s"," display -u [user_id]");
         System.out.print(" : ");
-        System.out.println("display user list");
-        System.out.printf("%-50s"," display -b");
+        System.out.println("display user information");
+        System.out.printf("%-50s"," display -b [book_id]");
         System.out.print(" : ");
-        System.out.println("display book list");
+        System.out.println("display book book information");
         System.out.printf("%-50s"," rec -u [user_id]");
         System.out.print(" : ");
         System.out.println("display recommendation score and all book for user");
         System.out.printf("%-50s"," rec -u [user_id] -b [book_id]");
         System.out.print(" : ");
         System.out.println("display recommendation score for user");
+        System.out.printf("%-50s"," rec -b");
+        System.out.print(" : ");
+        System.out.println("display recommendation book");
         System.out.printf("%-50s"," add -u [user_name]");
         System.out.print(" : ");
         System.out.println("add user");
-        System.out.printf("%-50s"," add -u [user_name] -b [book_id] -s [new_score]");
+        System.out.printf("%-50s"," add -u [user_id] -b [book_id] -s [new_score]");
         System.out.print(" : ");
         System.out.println("add user book score (old command eval)");
+        System.out.printf("%-50s"," add -u [user_id] -f [user_id]");
+        System.out.print(" : ");
+        System.out.println("add user friend");
         System.out.printf("%-50s"," add -b [book_name] [book_url]");
         System.out.print(" : ");
         System.out.println("add book");
+        System.out.printf("%-50s"," add -b [book_id] -w [word_id]");
+        System.out.print(" : ");
+        System.out.println("add book word");
         System.out.printf("%-50s"," update -u [user_id] [new_user_name]");
         System.out.print(" : ");
         System.out.println("update user name");

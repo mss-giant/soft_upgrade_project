@@ -68,8 +68,12 @@ public class DB_updater {
         }
     }
 
+
     public void create_sql_add_user(String user_name){
+        String reset = "SELECT setval(\'user_name_id_seq\',(select max(id) from user_name));";
         String sql = "INSERT INTO user_name (name) VALUES "+"(\'"+user_name+"\');";
+        System.out.println(reset);
+        System.out.println(sql);
     }
 
     public void create_sql_add_user_book_score(int user_id,int book_id,double new_score){
@@ -77,10 +81,23 @@ public class DB_updater {
         System.out.println(sql);
     }
     
+    public void create_sql_add_user_friend(int user_a,int user_b){
+        String sql = "INSERT INTO friend (user_a, user_b) values "+"("+user_a+","+user_b+");";
+        System.out.println(sql);
+    }
+
     public void create_sql_add_book(String book_name,String book_url){
+        String reset = "SELECT setval(\'url_id_seq\',(select max(id) from url));";
         String sql1 = "INSERT INTO url (name,url) VALUES "+"(\'"+book_name+"\'"+","+"\'"+book_url+"\'"+");";
+        System.out.println(reset);
         System.out.println(sql1);
     }
+
+    public void create_sql_add_book_word(int book_id,int word_id){
+        String sql = "INSERT INTO location (word_id, url_id) values "+"("+word_id+","+book_id+");";
+        System.out.println(sql);
+    }
+
 
     public void create_sql_update_user_name(int user_id, String new_user_name){
         String sql = "UPDATE user_name set name="+"\'"+new_user_name+"\'"+" where id="+user_id+";";
@@ -96,6 +113,9 @@ public class DB_updater {
         String sql = "UPDATE url set name="+"\'"+new_book_name+"\'"+" where id="+book_id+";";
         System.out.println(sql);
     }
+
+
+
 
     public void create_sql_delete_user(int user_id){
         String sql_user_name = "DELETE from user_name where id="+user_id+";";

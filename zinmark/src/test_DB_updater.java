@@ -4,7 +4,9 @@ public class test_DB_updater {
         DB_updater dbupdate = new DB_updater("jdbc:postgresql://localhost:5432/zinmark_db", "zinmark", "zinpass");
         dbupdate.create_sql_add_user("sato");
         dbupdate.create_sql_add_user_book_score(1, 3, 2.0);
+        dbupdate.create_sql_add_user_friend(3, 8);
         dbupdate.create_sql_add_book("mask", "hoho");
+        dbupdate.create_sql_add_book_word(3, 1);
         dbupdate.create_sql_update_user_name(1, "nini");
         dbupdate.create_sql_update_user_book_score(1, 1, 4.9);
         dbupdate.create_sql_update_book_name(1, "new name");
