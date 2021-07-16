@@ -4,7 +4,7 @@ import src.Book_tool.*;
 
 public class test_set {
     public static void main(String[] args) {
-        Book_controller bis = new Book_controller();
+        Book_setter_from_DB bis = new Book_setter_from_DB();
         Book_only_Recommend bos = new Book_only_Recommend();
         bis.set_database_info("jdbc:postgresql://localhost:5432/zinmark_db", "zinmark", "zinpass");
         bis.connect_and_select_data("url"); 
@@ -14,7 +14,7 @@ public class test_set {
         
         bos.set_books(bis.get_books());
         bos.cal_loop();
-        bos.set_serch_word("list queue bfs");
+        bos.set_serch_word("");
         bos.cal_word_score();
         bos.set_book_word_score_0_1();
         bos.display();

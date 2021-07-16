@@ -3,7 +3,7 @@ import src.User_tool.*;
 
 public class test_user_set {
     public static void main(String[] args) {
-        User_controller u_ctr = new User_controller();
+        User_setter_from_DB u_ctr = new User_setter_from_DB();
         
         u_ctr.set_database_info("jdbc:postgresql://localhost:5432/zinmark_db", "zinmark", "zinpass");
         u_ctr.connect_and_select_data("user_name");

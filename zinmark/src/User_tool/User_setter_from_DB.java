@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 
 
-public class User_controller {
+public class User_setter_from_DB {
     private Connection connection = null;
     private Statement statement = null;
     private ResultSet result = null;
@@ -25,7 +25,7 @@ public class User_controller {
 
     private Map<Integer,User> users = new HashMap<Integer,User>();
 
-    public User_controller(){
+    public User_setter_from_DB(){
     }
 
 
@@ -40,18 +40,11 @@ public class User_controller {
         }
     }
 
-    public void update_User_info(int id, String name){
-        //deve
-    }
-
     //User book score
     public void set_User_bookscore(int user_id, int book_id, double score){
         users.get(user_id).set_bookscore(book_id, score);
     }
 
-    public void update_User_bookscore(int user_id, int book_id, double new_score){
-        //dev
-    }
 
 
     public void set_User_friends(int user_a, int user_b){

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 
 
-public class Book_controller {
+public class Book_setter_from_DB {
     private Connection connection = null;
     private Statement statement = null;
     private ResultSet result = null;
@@ -27,7 +27,7 @@ public class Book_controller {
     private Map<Integer,MyBook> books = new HashMap<Integer, MyBook>();
 
 
-    public Book_controller(){
+    public Book_setter_from_DB(){
         
     }
 
