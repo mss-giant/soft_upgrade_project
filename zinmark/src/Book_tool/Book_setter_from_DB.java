@@ -128,7 +128,7 @@ public class Book_setter_from_DB {
         try {
             result = statement.executeQuery(sql);
             while (result.next()) {
-                set_book_info(result.getInt("id"),new String(Character.toChars(result.getInt("id")+64)), result.getString("url"));
+                set_book_info(result.getInt("id"),result.getString("name"), result.getString("url"));
                 
             }
         } catch (SQLException e) {

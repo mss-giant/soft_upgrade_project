@@ -139,7 +139,8 @@ public class Book_only_Recommend {
         System.out.format("%20s", " book score ");
         System.out.format("%20s", " all  score ");
         System.out.format("%20s", " book page ");
-        System.out.format("%20s", " bookid ");
+        System.out.format("%15s", " bookid ");
+        System.out.format("%10s", "book name");
         System.out.println();
                 
         List<Entry<Integer, MyBook>> book_list = new ArrayList<Entry<Integer,MyBook>>(books.entrySet());
@@ -170,6 +171,8 @@ public class Book_only_Recommend {
             System.out.format("%20s", book.getValue().get_my_page());
             System.out.print(": ");
             System.out.format("%8s", book.getValue().get_book_id());
+            System.out.print(": ");
+            System.out.print(book.getValue().get_book_name());
             System.out.println();
         }
 
