@@ -72,13 +72,48 @@ public class DB_updater {
         String sql = "INSERT INTO user_name (name) VALUES "+"(\'"+user_name+"\');";
     }
 
-    //ここからデータベースの変更
+    public void create_sql_add_user_book_score(int user_id,int book_id,double new_score){
+        String sql = "INSERT INTO score (user_id,book_id,score) VALUES "+"("+user_id+","+book_id+","+new_score+");";
+        System.out.println(sql);
+    }
+    
     public void create_sql_add_book(String book_name,String book_url){
         String sql1 = "INSERT INTO url (name,url) VALUES "+"(\'"+book_name+"\'"+","+"\'"+book_url+"\'"+");";
         System.out.println(sql1);
     }
 
+    public void create_sql_update_user_name(int user_id, String new_user_name){
+        String sql = "UPDATE user_name set name="+"\'"+new_user_name+"\'"+" where id="+user_id+";";
+        System.out.println(sql);
+    }
 
+    public void create_sql_update_user_book_score(int user_id, int book_id, double new_score){
+        String sql = "UPDATE score set score="+new_score+" where user_id="+user_id+" and book_id="+book_id+";";
+        System.out.println(sql);
+    }
+
+    public void create_sql_update_book_name(int book_id,String new_book_name){
+        String sql = "UPDATE url set name="+"\'"+new_book_name+"\'"+" where id="+book_id+";";
+        System.out.println(sql);
+    }
+
+    public void create_sql_delete_user(int user_id){
+        String sql_user_name = "DELETE from user_name where id="+user_id+";";
+        String sql_friend = "DELETE from friend where user_a="+user_id+" or "+"user_b="+user_id+";";
+        String sql_score = "DELETE from score where user_id="+user_id+";";
+        System.out.println(sql_user_name);
+        System.out.println(sql_friend);
+        System.out.println(sql_score);
+    }
+
+    public void create_sql_delete_book(int book_id){
+        String sql_url = "DELETE from url where id="+book_id+";";
+        String sql_location = "DELETE from location where url_id="+book_id+";";
+        String sql_link = "DELETE from link where source="+book_id+" or "+"target="+book_id+";";
+        System.out.println(sql_url);
+        System.out.println(sql_location);
+        System.out.println(sql_link);
+    }
 
 
 

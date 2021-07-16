@@ -10,6 +10,7 @@ public class test_set {
         bis.connect_and_select_data("url"); 
         bis.connect_and_select_data("link"); 
         bis.connect_and_select_data("location");
+        bis.connect_and_select_data("word");
         bis.serch_reference_to_me();
         
         bos.set_books(bis.get_books());
@@ -18,6 +19,9 @@ public class test_set {
         bos.cal_word_score();
         bos.set_book_word_score_0_1();
         bos.display();
+        for(Integer id : bis.get_words_list().keySet()){
+            System.out.println("id : "+id+"  word : "+bis.get_words_list().get(id));
+        }
         //bis.test_disp_book_info();
         //bis.test_disp_reference_book();
         //bis.test_disp_book_has_word();

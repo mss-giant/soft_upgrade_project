@@ -21,6 +21,9 @@ public class test_command {
             if(scan_cmd.get_add_user_call()){
                 System.out.println("add user call");
             }
+            if(scan_cmd.get_add_user_book_score_call()){
+                System.out.println("add user book score call");
+            }
             if(scan_cmd.get_add_book_call()){
                 System.out.println("add book call");
             }

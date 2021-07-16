@@ -15,6 +15,7 @@ public class Command_Scanner {
     private boolean rec_user_book_call;
 
     private boolean add_user_call;
+    private boolean add_user_book_score;
     private boolean add_book_call;
 
     private boolean update_user_name_call;
@@ -91,6 +92,7 @@ public class Command_Scanner {
         rec_user_call = false;
         rec_user_book_call = false;
         add_user_call = false;
+        add_user_book_score = false;
         add_book_call = false;
         update_user_name_call = false;
         update_user_book_score_call = false;
@@ -157,6 +159,19 @@ public class Command_Scanner {
             }
             else{
                 System.out.println("error : please input alphabet of number");
+            }
+        }
+        //add -u 1 -b 1 -s 5.0
+        else if(command.length==7 && command[1].equals("-u") && command[3].equals("-b") && command[5].equals("-s")){
+            if(command[2].matches("^[0-9]+$") && command[4].matches("^[0-9]+$") && command[6].matches("^-?(0|[1-9]\\d*)(\\.\\d+|)$")){
+                this.add_user_book_score = true;
+                command_input_data.put("user_id", command[2]);
+                command_input_data.put("book_id", command[4]);
+                command_input_data.put("score", command[6]);
+                System.out.println("add new score  user_id : " + command[2] + "  book_id : "+command[4]+" score : "+command[6]);
+            }
+            else{
+                System.out.println("error : please input correct value");
             }
         }
         else if (command.length==4 && command[1].equals("-b")){
@@ -280,6 +295,10 @@ public class Command_Scanner {
         return this.add_user_call;
     }
 
+    public boolean get_add_user_book_score_call(){
+        return this.add_user_book_score;
+    }
+
     public boolean get_add_book_call() {
         return this.add_book_call;
     }
@@ -341,6 +360,9 @@ public class Command_Scanner {
         System.out.printf("%-50s"," add -u [user_name]");
         System.out.print(" : ");
         System.out.println("add user");
+        System.out.printf("%-50s"," add -u [user_name] -b [book_id] -s [new_score]");
+        System.out.print(" : ");
+        System.out.println("add user book score (old command eval)");
         System.out.printf("%-50s"," add -b [book_name] [book_url]");
         System.out.print(" : ");
         System.out.println("add book");

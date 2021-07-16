@@ -25,6 +25,7 @@ public class Book_setter_from_DB {
 
 
     private Map<Integer,MyBook> books = new HashMap<Integer, MyBook>();
+    private Map<Integer,String> word_list = new HashMap<Integer,String>();
 
 
     public Book_setter_from_DB(){
@@ -35,6 +36,9 @@ public class Book_setter_from_DB {
         return this.books;
     }
 
+    public Map<Integer,String> get_words_list(){
+        return this.word_list;
+    }
 
     //MyBook設定関連
     public void set_book_info(int id, String book_name,String my_page){
@@ -50,6 +54,10 @@ public class Book_setter_from_DB {
 
     public void set_book_has_word(int id, String word){
         books.get(id).set_word(word);
+    }
+
+    public void set_words_list(int id, String word){
+        word_list.put(id, word);
     }
 
     public void serch_reference_to_me(){
@@ -118,6 +126,9 @@ public class Book_setter_from_DB {
         if(table_name.equals("location")){
             scandb_book_has_word();
         }
+        if(table_name.equals("word")){
+            scandb_word_list();
+        }
     }
 
 
@@ -166,6 +177,17 @@ public class Book_setter_from_DB {
  
     }
 
+    public void scandb_word_list(){
+        sql = "select * from word;";
+        try {
+            result = statement.executeQuery(sql);
+            while (result.next()) {
+                set_words_list(result.getInt("id"), result.getString("word"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void test_disp_book_info(){
