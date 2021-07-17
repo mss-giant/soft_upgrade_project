@@ -11,6 +11,7 @@ public class test_set {
         bis.connect_and_select_data("link"); 
         bis.connect_and_select_data("location");
         bis.connect_and_select_data("word");
+        bis.connect_and_select_data("serial");
         bis.serch_reference_to_me();
         
         bos.set_books(bis.get_books());
@@ -22,6 +23,7 @@ public class test_set {
         for(Integer id : bis.get_words_list().keySet()){
             System.out.println("id : "+id+"  word : "+bis.get_words_list().get(id));
         }
+        System.out.println(bis.get_next_book_num());
         //bis.test_disp_book_info();
         //bis.test_disp_reference_book();
         //bis.test_disp_book_has_word();

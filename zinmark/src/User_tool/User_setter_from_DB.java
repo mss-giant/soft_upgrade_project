@@ -22,6 +22,8 @@ public class User_setter_from_DB {
     private String password;
     private String sql;
 
+    private int serial_next_number;
+
 
     private Map<Integer,User> users = new HashMap<Integer,User>();
 
@@ -58,6 +60,10 @@ public class User_setter_from_DB {
         this.url = url;
         this.user = user;
         this.password = password;
+    }
+
+    public int get_next_user_num(){
+        return this.serial_next_number;
     }
 
     public void connect_and_select_data(String table_name) {
@@ -103,6 +109,9 @@ public class User_setter_from_DB {
         if(table_name.equals("friend")){
             scandb_User_friends(table_name);
         }
+        if(table_name.equals("serial")){
+            scandb_next_serial_number();
+        }
     }
 
 
@@ -146,6 +155,19 @@ public class User_setter_from_DB {
             e.printStackTrace();
         }
 
+    }
+
+    public void scandb_next_serial_number(){
+        sql = "select setval('user_name_id_seq',(select max(id) from user_name)) as nownum;";
+        //sql = "select max(id) from url;";
+        try {
+            result = statement.executeQuery(sql);
+            while (result.next()) {
+                this.serial_next_number = result.getInt("nownum") + 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -23,6 +23,8 @@ public class Book_setter_from_DB {
     private String password;
     private String sql;
 
+    private int serial_next_number;
+
 
     private Map<Integer,MyBook> books = new HashMap<Integer, MyBook>();
     private Map<Integer,String> word_list = new HashMap<Integer,String>();
@@ -74,6 +76,9 @@ public class Book_setter_from_DB {
         }
     }
 
+    public int get_next_book_num(){
+        return this.serial_next_number;
+    }
 
 
     // データベース関連
@@ -128,6 +133,9 @@ public class Book_setter_from_DB {
         }
         if(table_name.equals("word")){
             scandb_word_list();
+        }
+        if(table_name.equals("serial")){
+            scandb_next_serial_number();
         }
     }
 
@@ -189,6 +197,18 @@ public class Book_setter_from_DB {
         }
     }
 
+    public void scandb_next_serial_number(){
+        sql = "select setval('url_id_seq',(select max(id) from url)) as nownum;";
+        //sql = "select max(id) from url;";
+        try {
+            result = statement.executeQuery(sql);
+            while (result.next()) {
+                this.serial_next_number = result.getInt("nownum") + 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void test_disp_book_info(){
         for(Integer id : books.keySet()){

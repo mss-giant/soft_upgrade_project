@@ -1,4 +1,5 @@
 package src;
+
 import src.User_tool.*;
 
 public class test_user_set {
@@ -9,6 +10,7 @@ public class test_user_set {
         u_ctr.connect_and_select_data("user_name");
         u_ctr.connect_and_select_data("score");
         u_ctr.connect_and_select_data("friend");
+        u_ctr.connect_and_select_data("serial");
 
         User_only_Recommendation u_rec = new User_only_Recommendation(u_ctr.get_users());
         int target_user_id = 1;
@@ -17,6 +19,7 @@ public class test_user_set {
         u_rec.set_friend_of_friend();
         u_rec.cal_target_rec_book_score(target_user_id);
         u_rec.all_display(target_user_id);
+        System.out.println(u_ctr.get_next_user_num());
 
         //u_ctr.test_disp();
     }
