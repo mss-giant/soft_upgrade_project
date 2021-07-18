@@ -2,6 +2,7 @@ package src.User_tool;
 
 
 
+
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -16,7 +17,7 @@ import java.util.Comparator;
 
 
 
-class User {
+public class User {
     private int id;
     private String user_name;                                          //ユーザの名前を番号で管理　入力の値と一致している
     Map<Integer,Double> book_score = new HashMap<>();               //自分が評価した本と評価値を管理
@@ -30,7 +31,7 @@ class User {
     
     
     //userの情報をset
-    User(int id, String user_name){
+    public User(int id, String user_name){
         this.id = id;
         this.user_name = user_name;
     }

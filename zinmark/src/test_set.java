@@ -16,7 +16,7 @@ public class test_set {
         
         bos.set_books(bis.get_books());
         bos.cal_loop();
-        bos.set_serch_word("");
+        //bos.set_serch_word("");
         bos.cal_word_score();
         bos.set_book_word_score_0_1();
         bos.display();

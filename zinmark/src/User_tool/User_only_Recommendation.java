@@ -16,7 +16,10 @@ public class User_only_Recommendation {
 
 
 
-    public User_only_Recommendation(Map<Integer,User> users){
+    public User_only_Recommendation(){
+    }
+
+    public void set_users(Map<Integer,User> users){
         this.users = users;
         this.number_of_users = users.size();
     }

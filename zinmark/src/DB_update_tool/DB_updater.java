@@ -21,7 +21,10 @@ public class DB_updater {
     private String table_name; // テーブルの名前
     private ArrayList<String> update_DB_querys;
 
-    public DB_updater(String url, String user, String password) {
+    public DB_updater() {
+    }
+
+    public void set_database_info(String url, String user, String password){
         this.url = url;
         this.user = user;
         this.password = password;
@@ -153,12 +156,14 @@ public class DB_updater {
         String sql_url = "DELETE from url where id="+book_id+";";
         String sql_location = "DELETE from location where url_id="+book_id+";";
         String sql_link = "DELETE from link where source="+book_id+" or "+"target="+book_id+";";
+        String sql_score_book = "DELETE from score where book_id="+book_id+";";
         //System.out.println(sql_url);
         //System.out.println(sql_location);
         //System.out.println(sql_link);
         update_DB_querys.add(sql_url);
         update_DB_querys.add(sql_location);
         update_DB_querys.add(sql_link);
+        update_DB_querys.add(sql_score_book);
     }
 
     public void test_disp(){

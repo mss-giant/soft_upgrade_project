@@ -87,11 +87,12 @@ public class Book_only_Recommend {
 
 
 
-    public void set_serch_word(String word){
-        String[] serch_words = word.split("\\s+");
-        for(String s : serch_words){
-            serch_word_list.add(s);
-        }
+    public void set_serch_word(ArrayList<String> word_list){
+        //String[] serch_words = word.split("\\s+");
+        //for(String s : serch_words){
+        //    serch_word_list.add(s);
+        //}
+        serch_word_list=word_list;
         
     }
 

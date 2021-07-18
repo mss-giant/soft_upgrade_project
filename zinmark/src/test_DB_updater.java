@@ -6,7 +6,8 @@ import src.DB_update_tool.*;
 public class test_DB_updater {
     public static void main(String[] args) {
         System.out.println("roading....");
-        DB_updater dbupdate = new DB_updater("jdbc:postgresql://localhost:5432/zinmark_db", "zinmark", "zinpass");
+        DB_updater dbupdate = new DB_updater();
+        dbupdate.set_database_info("jdbc:postgresql://localhost:5432/zinmark_db", "zinmark", "zinpass");
         dbupdate.create_sql_add_user("sato");
         dbupdate.create_sql_add_user_book_score(1, 3, 2.0);
         dbupdate.create_sql_add_user_friend(3, 8);
