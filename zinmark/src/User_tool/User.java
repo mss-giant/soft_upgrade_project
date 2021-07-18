@@ -213,6 +213,21 @@ public class User {
         }
     }
 
+    public void disp_add_rec_book_score(int booknum, Map<Integer,MyBook> books ){
+        if(this.rec_book_score.containsKey(booknum)){
+            if(books.containsKey(booknum)){
+                double add_score = this.get_rec_book_score(booknum) + books.get(booknum).get_all_score();
+                System.out.println("Book Number : "+booknum + "   " +"Recommendation : "+ add_score);
+            }
+            else{
+                System.out.println("Not found book. book id : "+booknum);
+            }
+        }
+        else{
+            System.out.println("there is not recomendation book.");
+        }
+    }
+
     //自らに推薦されている本をソートして出力する
     public void disp_rec_book_score_sort(){
         List<Entry<Integer, Double>> rec_book_list = new ArrayList<Entry<Integer,Double>>(rec_book_score.entrySet());
@@ -237,6 +252,46 @@ public class User {
         else{
             System.out.println("there is not recommendation book.");
         }
+    }
+
+
+    //new
+    public void disp_add_rec_book_score_sort(Map<Integer,MyBook> books){
+        Map<Integer,Double> add_rec_score = new HashMap<Integer,Double>();
+        for(Integer b : rec_book_score.keySet()){
+            if(books.containsKey(b)){
+                double add_score = rec_book_score.get(b) + books.get(b).get_all_score();
+                add_rec_score.put(b, add_score);
+            }
+            else{
+                System.out.println("Not found book. book id : "+b);
+            }
+        }
+
+        List<Entry<Integer, Double>> rec_book_list = new ArrayList<Entry<Integer,Double>>(add_rec_score.entrySet());
+
+        Collections.sort(rec_book_list, new Comparator<Entry<Integer ,Double>>() {
+            //compareを使用して値を比較する
+            public int compare(Entry<Integer, Double> s1, Entry<Integer, Double> s2)
+            {
+                //降順
+                return s2.getValue().compareTo(s1.getValue());
+            }
+        });
+
+
+        // 7. ループで要素順に値を取得する
+        if(!rec_book_list.isEmpty()){
+            System.out.println();        
+            for(Entry<Integer, Double> entry : rec_book_list) {
+                System.out.println("Book Number : "+entry.getKey() + "   " +"Recommendation : "+ entry.getValue());
+            }
+        }
+        else{
+            System.out.println("there is not recommendation book.");
+        }
+
+
     }
 
     //以下改良部分　課題5を利用するため　以下のメソッドを追加した

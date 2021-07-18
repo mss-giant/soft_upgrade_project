@@ -194,6 +194,8 @@ class test_system_go {
             target_user_id=user_id;
             user_only_rec.cal_target_rec_book_score(target_user_id);
             all_users.get(user_id).disp_rec_book_score_sort();
+            System.out.println(" \n add book score -->>");
+            all_users.get(user_id).disp_add_rec_book_score_sort(all_books);
         }
         else{
             System.out.println("Not found user");
@@ -208,6 +210,8 @@ class test_system_go {
                 target_user_id = user_id;
                 user_only_rec.cal_target_rec_book_score(target_user_id);
                 all_users.get(user_id).disp_rec_book_score(book_id);
+                System.out.println("\n add book score");
+                all_users.get(user_id).disp_add_rec_book_score(book_id, all_books);
             }
             else{
                 System.out.println("Not found book");
