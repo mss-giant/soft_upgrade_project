@@ -1,0 +1,18 @@
+********************command list********************
+ display -u [user_id]                              : display user information
+ display -b [book_id]                              : display book book information
+ rec -u [user_id]                                  : display recommendation score and all book for user
+ rec -u [user_id] -b [book_id]                     : display recommendation score for user
+ rec -b                                            : display recommendation book
+ add -u [user_name]                                : add user
+ add -u [user_id] -b [book_id] -s [new_score]      : add user book score (old command eval)
+ add -u [user_id] -f [user_id]                     : add user friend
+ add -b [book_name] [book_url]                     : add book
+ add -b [book_id] -w [word_id]                     : add book word
+ update -u [user_id] [new_user_name]               : update user name
+ update -u [user_id] -b [book_id] -s [new_score]   : update user book score (old command name is "eval")
+ update -b [book_id] [new_book_name]               : update book name
+ delete -u [user_id]                               : delete user
+ delete -b [book_id]                               : delete book
+ search                                            : input word and display recommendation book
+ exit                                              :  finish

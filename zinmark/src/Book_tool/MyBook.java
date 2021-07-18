@@ -153,5 +153,22 @@ public class MyBook implements Comparable<MyBook>{
     }
 
 
+    public void disp_book_information(){
+        System.out.println();
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("Book ID : "+this.book_id+"     Book Name : "+this.book_name+"     Book url : "+this.my_page);
+        //System.out.println(".......................................................................");
+        System.out.println("Reference lists");
+        for(MyBook ref_book : reference_book){
+            System.out.println("Book ID : "+ref_book.book_id+"     Book Name : "+ref_book.book_name+"     Book url : "+ref_book.my_page);
+        }
+        //System.out.println(".......................................................................");
+        System.out.println("word list");
+        for(String word : word_list){
+            System.out.print(" "+word);
+        }
+        System.out.println();
+        System.out.println("+---------------------------------------------------------------------+");
+    }
 
 }

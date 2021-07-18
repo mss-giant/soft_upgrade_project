@@ -8,16 +8,20 @@ import java.util.Map;
 class Book_Recommendation {
 
     private User target_user ;                     //ターゲットユーザー　推薦する対象
-    private int number_of_books ;                  //本の数を設定
+    //private int number_of_books ;                  //本の数を設定
+    
     private Map<Integer,User> users ;                        //全ユーザーを格納
     Map<Integer,Double> rec_book_score ;           //本の番号に対応する推薦度を格納
     Map<Integer,Double> all_user_similar_score ;   //推薦する本に対し、他のユーザーの類似度を合計する
 
+    private ArrayList<Integer> book_ids;
+
 
     Book_Recommendation(){
         //target_user = new User();
-        number_of_books = 0;
+        //number_of_books = 0;
         //users = new ArrayList<User>();
+        book_ids = new ArrayList<Integer>();
         rec_book_score = new HashMap<>();
         all_user_similar_score = new HashMap<>();
 
@@ -34,8 +38,12 @@ class Book_Recommendation {
     }
 
     //本の本数をセット
-    public void set_number_of_books(int books){
-        this.number_of_books = books;
+    //public void set_number_of_books(int books){
+    //    this.number_of_books = books;
+    //}
+
+    public void set_books(ArrayList<Integer> book_ids){
+        this.book_ids = book_ids;
     }
 
 
@@ -44,8 +52,11 @@ class Book_Recommendation {
     //　ターゲットユーザー意外でループ
     //　上記の条件に合ったとき、かつ他のユーザーが評価していた場合のみ計算
     //　友人の時だけ推薦度を計算
+
+    //変更する
     public void cal_rec_score(){
-        for(int b=1;b<=this.number_of_books;b++){
+        //for(int b=1;b<=this.number_of_books;b++){
+        for(Integer b : book_ids){
             if(!target_user.check_have_book(b)){
                 for(User u_opponent : users.values()){
                     if(!target_user.equals(u_opponent)){

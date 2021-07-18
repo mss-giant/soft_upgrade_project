@@ -132,7 +132,7 @@ public class Command_Scanner {
         }
         else if(command.length==3 && command[1].equals("-b")){
             if(command[2].matches("^[0-9]+$")){
-                this.delete_book_call = true;
+                this.display_book_info_call = true;
                 command_input_data.put("book_id", command[2]);
             }
             else{

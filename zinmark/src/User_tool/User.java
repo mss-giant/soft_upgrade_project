@@ -1,4 +1,5 @@
 package src.User_tool;
+import src.Book_tool.*;
 
 
 
@@ -29,7 +30,7 @@ public class User {
     
     private int myrank = 0;                                         //自分のランク　子をいくつ持つか　友人関係で使用
     
-    
+     
     //userの情報をset
     public User(int id, String user_name){
         this.id = id;
@@ -107,7 +108,7 @@ public class User {
 
     //自らが評価した本とその評価値を出力する
     //friend も出力ここで
-    public void disp_book_score(User target,int how_many_book){
+    public void disp_book_score(User target,ArrayList<Integer> book_ids){
         //System.out.print("U" + (this.get_Name())+"  ");
         System.out.format("%8s", this.get_Name());
         System.out.print("  ");
@@ -117,7 +118,7 @@ public class User {
         else{
             System.out.print("----");
         }
-        for(int j=1;j<=how_many_book;j++){
+        for(Integer j : book_ids){
             if(this.check_have_book(j)){
                 System.out.print("  "+this.get_bookscore(j)+" ");
             }
@@ -269,5 +270,31 @@ public class User {
     }
 
   
+
+    public void disp_user_information(){
+        System.out.println("+-------------------------------------------------+");
+        System.out.println("User ID : "+this.id+"      User Name : "+this.user_name);
+        System.out.print("User evaluated Book : ");
+        for(Integer i : book_score.keySet()){
+            System.out.print("B");
+            System.out.format("%-4s", i);
+        }
+        System.out.println();
+        System.out.print("                      ");
+        for(Integer b : book_score.keySet()){
+            System.out.print("");
+            System.out.format("%-5s", book_score.get(b).toString());
+        }
+        System.out.println();
+        System.out.println("User friend");
+        for(User u_friend : friends_map.keySet()){
+            if(friends_map.get(u_friend)){
+                System.out.print("User ID : User Name -->>  ");
+                System.out.print(u_friend.get_id()+" : ");
+                System.out.println(u_friend.get_Name());
+            }
+        }
+        System.out.println("+-------------------------------------------------+");
+    }
 
 }

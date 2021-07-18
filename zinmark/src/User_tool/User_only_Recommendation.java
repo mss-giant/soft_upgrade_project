@@ -8,11 +8,11 @@ public class User_only_Recommendation {
     private Book_Recommendation book_rec;
 
     private int target_user_id;
-    private int number_of_users;
-    private int number_of_books;
-    private int number_of_rerations;
+    //private int number_of_books;
 
     private UnionFindTree_EX union_ex;
+
+    private ArrayList<Integer> book_ids;
 
 
 
@@ -21,11 +21,14 @@ public class User_only_Recommendation {
 
     public void set_users(Map<Integer,User> users){
         this.users = users;
-        this.number_of_users = users.size();
     }
 
-    public void set_number_of_books(int number_of_books){
-        this.number_of_books = number_of_books;
+    //public void set_number_of_books(int number_of_books){
+    //    this.number_of_books = number_of_books;
+    //}
+
+    public void set_books(ArrayList<Integer> book_ids){
+        this.book_ids = book_ids;
     }
 
     public void cal_Similar_score(){
@@ -71,7 +74,8 @@ public class User_only_Recommendation {
     public void cal_target_rec_book_score(int target_user_id){
         book_rec = new Book_Recommendation();
         book_rec.set_users(users);
-        book_rec.set_number_of_books(number_of_books);
+        //book_rec.set_number_of_books(number_of_books);
+        book_rec.set_books(book_ids);
         book_rec.set_targetuser(users.get(target_user_id));
         book_rec.cal_rec_score();
         users.get(target_user_id).set_rec_book_score(book_rec);
@@ -81,13 +85,13 @@ public class User_only_Recommendation {
         System.out.println();
         //System.out.print("    Score");
         System.out.format("%15s", "Score");
-        for(int i=1;i<=number_of_books;i++){
+        for(Integer i : book_ids){
             System.out.print("  B"+(i)+"  ");
         }
         System.out.println();
         
-        for(int id=1;id<=number_of_users;id++){
-            users.get(id).disp_book_score(users.get(target_user_id), number_of_books);
+        for(Integer id : users.keySet()){
+            users.get(id).disp_book_score(users.get(target_user_id), this.book_ids);
         }        
         users.get(target_user_id).disp_rec_book_score_sort();
     }
