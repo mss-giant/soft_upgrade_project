@@ -1,3 +1,7 @@
+package src.Command_tool;
+
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,7 +33,6 @@ public class Command_Scanner {
     private boolean delete_book_call;
 
     private boolean search_mode_call;
-    private boolean help_call;
     private boolean exit_call;
     private boolean command_found;
 
@@ -37,9 +40,8 @@ public class Command_Scanner {
     private Map<String, String> command_input_data = new HashMap<String, String>();
     private ArrayList<String> input_words_list = new ArrayList<String>();
 
-    private Pattern number = Pattern.compile("^[0-9]+$");
 
-    Command_Scanner() {
+    public Command_Scanner() {
 
     }
 
@@ -110,7 +112,6 @@ public class Command_Scanner {
         delete_book_call = false;
         
         search_mode_call = false;
-        help_call = false;
         exit_call = false;
         command_found = false;
         command_input_data.clear();
@@ -352,6 +353,7 @@ public class Command_Scanner {
         return this.add_book_word_call;
     }
 
+
     // update command
     public boolean get_update_user_name_call() {
         return this.update_user_name_call;
@@ -364,6 +366,7 @@ public class Command_Scanner {
     public boolean get_update_book_name_call(){
         return this.update_book_name_call;
     }
+
 
     // delete command
     public boolean get_delete_user_call() {
@@ -378,6 +381,7 @@ public class Command_Scanner {
         return this.search_mode_call;
     }
 
+    
     // exit command
     public boolean get_exit_call() {
         return this.exit_call;

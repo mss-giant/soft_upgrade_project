@@ -1,7 +1,15 @@
+package src;
+import src.Command_tool.*;
+
 public class test_command {
     public static void main(String[] args) {
         Command_Scanner scan_cmd = new Command_Scanner();
         while(true){
+            for(int i=0;i<40;i++){
+                System.out.print("__");
+            }
+            System.out.println();
+
             scan_cmd.scan_command();
             if(scan_cmd.get_exit_call()){
                 break;
