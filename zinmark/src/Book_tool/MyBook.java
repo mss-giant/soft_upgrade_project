@@ -8,7 +8,7 @@ public class MyBook implements Comparable<MyBook>{
     private int book_id;                //bookid
     private String my_page;
     private String book_name;
-    private int number_reference_book;
+    //private int number_reference_book;
 
     private double book_score;
     private double book_score_0_1;
@@ -169,6 +169,15 @@ public class MyBook implements Comparable<MyBook>{
         }
         System.out.println();
         System.out.println("+---------------------------------------------------------------------+");
+    }
+
+    public void remove_reference_reference_to_me(MyBook remove_book){
+        if(reference_book.contains(remove_book)){
+            this.reference_book.remove(remove_book);
+        }
+        if(referenced_to_me.contains(remove_book)){
+            this.referenced_to_me.remove(remove_book);
+        }
     }
 
 }

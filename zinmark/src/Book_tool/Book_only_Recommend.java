@@ -92,7 +92,8 @@ public class Book_only_Recommend {
         //for(String s : serch_words){
         //    serch_word_list.add(s);
         //}
-        serch_word_list=word_list;
+        //serch_word_list=word_list;
+        serch_word_list.addAll(word_list);
         
     }
 
@@ -178,6 +179,15 @@ public class Book_only_Recommend {
         }
 
 
+    }
+
+
+    public void remove_references(MyBook remove_book){
+        for(MyBook bo : books.values()){
+            if(!bo.equals(remove_book)){
+                bo.remove_reference_reference_to_me(remove_book);
+            }
+        }
     }
 
 

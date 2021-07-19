@@ -51,7 +51,6 @@ public class Command_Scanner {
         Scanner input = new Scanner(System.in);
         String inputed_command = input.nextLine();
         String[] input_command_split = inputed_command.split("\\s+");
-        // System.out.println(input_command_split[0]);
         if (input_command_split[0].equals("display")) {
             command_found = true;
             display_command_controller(input_command_split);
@@ -117,6 +116,7 @@ public class Command_Scanner {
         exit_call = false;
         command_found = false;
         command_input_data.clear();
+        input_words_list.clear();
     }
 
     // display command

@@ -158,16 +158,14 @@ class test_system_go {
                 update_book_name();
             }
             if (scan_command.get_delete_user_call()) {
-
+                delete_user();
             }
             if (scan_command.get_delete_book_call()) {
-
+                delete_book();
             }
             if (scan_command.get_search_mode_call()) {
-                for (String s : scan_command.get_input_words()) {
-                    System.out.print(s + " ");
-                }
                 System.out.println();
+                search_mode();
             }
 
             for (int i = 0; i < 40; i++) {
@@ -434,6 +432,45 @@ class test_system_go {
         }
     }
 
+    public void delete_user(){
+        int user_id = Integer.parseInt(scan_command.get_command_data().get("user_id"));
+        if(all_users.containsKey(user_id)){
+            user_only_rec.remove_friend(all_users.get(user_id));
+            all_users.remove(user_id);
+            db_update.create_sql_delete_user(user_id);
+            update_user_value();
+            System.out.println("deleted user. user id : "+user_id);
+        }
+        else{
+            System.out.println("Not found user");
+        }
+    }
 
+    public void delete_book(){
+        int book_id = Integer.parseInt(scan_command.get_command_data().get("book_id"));
+        if(all_books.containsKey(book_id)){
+            user_only_rec.remove_book_score(book_id);
+            book_only_rec.remove_references(all_books.get(book_id));
+            all_books.remove(book_id);
+            db_update.create_sql_delete_book(book_id);
+            update_book_value();
+            update_user_value();
+            System.out.println("deleted book    book id : "+book_id);
+        }
+        else{
+            System.out.println("Not found book");
+        }
+    }
+
+    public void search_mode(){
+        reset_search_word_list();
+        this.serch_word_list.addAll(scan_command.get_input_words());
+        update_book_value();
+    }
+
+    public void reset_search_word_list(){
+        book_only_rec.reset_serch_word();
+        this.serch_word_list.clear();
+    }
 
 }

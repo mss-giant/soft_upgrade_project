@@ -104,9 +104,24 @@ public class User_only_Recommendation {
         }
     }
 
+    public void remove_friend(User remove_friend){
+        for(User user_me : users.values()){
+            //if(user_me.check_User_friends(remove_friend)){
+                
+            //}
+            if(!user_me.equals(remove_friend)){
+                user_me.remove_friend(remove_friend);
+            }
+        }
+    }
 
-
-
+    public void remove_book_score(int book_id){
+        for(User user : users.values()){
+            //if(user.check_have_book(book_id)){
+               user.remove_book_score(book_id); 
+            //}
+        }
+    }
 
 
 

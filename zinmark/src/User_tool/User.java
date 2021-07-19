@@ -357,4 +357,16 @@ public class User {
         this.rec_book_score.clear();
     }
     
+    public void remove_friend(User remove_friend){
+        if(friends_map.containsKey(remove_friend)){
+            this.friends_map.remove(remove_friend);
+        }
+    }
+
+    public void remove_book_score(int book_id){
+        if(book_score.containsKey(book_id)){
+           this.book_score.remove(book_id); 
+        }
+    }
+
 }
