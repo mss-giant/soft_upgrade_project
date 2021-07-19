@@ -1,2 +1,0 @@
-hello world
-javac -classpath .:/home/gigi/link/soft/upgrade_project_git/zinmark/lib/postgresql-42.2.22.jar Scantest.java
