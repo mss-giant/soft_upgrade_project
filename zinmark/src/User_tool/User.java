@@ -352,4 +352,9 @@ public class User {
         System.out.println("+-------------------------------------------------+");
     }
 
+    public void reset_similar_recommend(){
+        this.similar_opponent_score.clear();
+        this.rec_book_score.clear();
+    }
+    
 }

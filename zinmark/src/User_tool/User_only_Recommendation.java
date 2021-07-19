@@ -98,7 +98,11 @@ public class User_only_Recommendation {
         users.get(target_user_id).disp_rec_book_score_sort();
     }
 
-
+    public void reset_similar_recommend(){
+        for(User u : users.values()){
+            u.reset_similar_recommend();
+        }
+    }
 
 
 

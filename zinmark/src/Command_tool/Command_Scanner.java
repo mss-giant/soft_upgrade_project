@@ -192,8 +192,8 @@ public class Command_Scanner {
                 command_input_data.put("user_id", command[2]);
                 command_input_data.put("book_id", command[4]);
                 command_input_data.put("score", command[6]);
-                System.out.println("add new score  user_id : " + command[2] + "  book_id : " + command[4] + " score : "
-                        + command[6]);
+                //System.out.println("add new score  user_id : " + command[2] + "  book_id : " + command[4] + " score : "
+                //        + command[6]);
             } else {
                 System.out.println("error : please input correct value");
             }
@@ -208,8 +208,8 @@ public class Command_Scanner {
                 this.add_book_call = true;
                 command_input_data.put("book_name", command[2]);
                 command_input_data.put("url", command[3]);
-                System.out.println("Created!" + " Book name is : " + command[2]);
-                System.out.println("Book url is : " + command[3]);
+                //System.out.println("Created!" + " Book name is : " + command[2]);
+                //System.out.println("Book url is : " + command[3]);
             } else {
                 System.out.println("error : please input correct URL");
             }
@@ -232,7 +232,7 @@ public class Command_Scanner {
                 this.update_user_name_call = true;
                 command_input_data.put("user_id", command[2]);
                 command_input_data.put("user_name", command[3]);
-                System.out.println("updated" + " New User name is : " + command[3]);
+                //System.out.println("updated" + " New User name is : " + command[3]);
             } else {
                 System.out.println("error : please input integer and alphabet or number");
             }
@@ -244,7 +244,7 @@ public class Command_Scanner {
                 command_input_data.put("user_id", command[2]);
                 command_input_data.put("book_id", command[4]);
                 command_input_data.put("score", command[6]);
-                System.out.println("updated" + " New score is : " + command[6] + " book id is " + command[4]);
+                //System.out.println("updated" + " New score is : " + command[6] + " book id is " + command[4]);
             } else {
                 System.out.println("error : please input integer and integer and double");
             }
@@ -253,7 +253,7 @@ public class Command_Scanner {
                 this.update_book_name_call = true;
                 command_input_data.put("book_id", command[2]);
                 command_input_data.put("book_name", command[3]);
-                System.out.println("updated" + " New Book name is : " + command[3] + " book id is " + command[2]);
+                //System.out.println("updated" + " New Book name is : " + command[3] + " book id is " + command[2]);
             } else {
                 System.out.println("error : please input integer and alphabet or number");
             }
@@ -393,6 +393,15 @@ public class Command_Scanner {
         System.out.printf("%-50s", " display -b [book_id]");
         System.out.print(" : ");
         System.out.println("display book book information");
+        System.out.printf("%-50s", " display -list user");
+        System.out.print(" : ");
+        System.out.println("display all userId and user name");
+        System.out.printf("%-50s", " display -list book");
+        System.out.print(" : ");
+        System.out.println("display all bookID and book name");
+        System.out.printf("%-50s", " display -list word");
+        System.out.print(" : ");
+        System.out.println("display all wordId and word");
         System.out.printf("%-50s", " rec -u [user_id]");
         System.out.print(" : ");
         System.out.println("display recommendation score and all book for user");

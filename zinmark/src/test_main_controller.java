@@ -17,7 +17,6 @@ public class test_main_controller {
     }
 }
 
-
 class test_system_go {
     private Book_setter_from_DB book_setter = new Book_setter_from_DB();
     private Book_only_Recommend book_only_rec = new Book_only_Recommend();
@@ -84,6 +83,7 @@ class test_system_go {
     // update cal
     public void update_user_value() {
         user_only_rec.set_users(all_users);
+        user_only_rec.reset_similar_recommend();
         // user_only_rec.set_number_of_books(book_setter.get_next_book_num() - 1);
         ArrayList<Integer> book_ids = new ArrayList<Integer>();
         book_ids.addAll(all_books.keySet());
@@ -149,13 +149,13 @@ class test_system_go {
                 add_book_word();
             }
             if (scan_command.get_update_user_name_call()) {
-
+                update_user_name();
             }
             if (scan_command.get_update_user_book_score_call()) {
-
+                update_user_book_score();
             }
             if (scan_command.get_update_book_name_call()) {
-
+                update_book_name();
             }
             if (scan_command.get_delete_user_call()) {
 
@@ -196,64 +196,66 @@ class test_system_go {
         }
     }
 
-    public void display_user_list(){
-        System.out.println("+----------------------------------------------------------------------------------------+");
-        for(Integer id : all_users.keySet()){
-            if(id%5==0){
+    public void display_user_list() {
+        System.out
+                .println("+----------------------------------------------------------------------------------------+");
+        for (Integer id : all_users.keySet()) {
+            if (id % 5 == 0) {
                 System.out.format("%3s", id.toString());
                 System.out.print(" : ");
                 System.out.format("%-10s", all_users.get(id).get_Name());
                 System.out.println();
-            }
-            else{
+            } else {
                 System.out.format("%3s", id.toString());
                 System.out.print(" : ");
                 System.out.format("%-10s", all_users.get(id).get_Name());
             }
         }
         System.out.println();
-        System.out.println("+----------------------------------------------------------------------------------------+");
+        System.out
+                .println("+----------------------------------------------------------------------------------------+");
     }
 
-    public void display_book_list(){
-        System.out.println("+----------------------------------------------------------------------------------------+");
-        for(Integer id : all_books.keySet()){
-            if(id%5==0){
+    public void display_book_list() {
+        System.out
+                .println("+----------------------------------------------------------------------------------------+");
+        for (Integer id : all_books.keySet()) {
+            if (id % 5 == 0) {
                 System.out.format("%3s", id.toString());
                 System.out.print(" : ");
                 System.out.format("%-10s", all_books.get(id).get_book_name());
                 System.out.println();
-            }
-            else{
+            } else {
                 System.out.format("%3s", id.toString());
                 System.out.print(" : ");
                 System.out.format("%-10s", all_books.get(id).get_book_name());
             }
         }
         System.out.println();
-        System.out.println("+----------------------------------------------------------------------------------------+");
+        System.out
+                .println("+----------------------------------------------------------------------------------------+");
     }
 
-    public void display_word_list(){
-        Map<Integer,String> wordslist = book_setter.get_words_list();
-        System.out.println("+----------------------------------------------------------------------------------------+");
-        for(Integer id : wordslist.keySet()){
-            if(id%5==0){
+    public void display_word_list() {
+        Map<Integer, String> wordslist = book_setter.get_words_list();
+        System.out
+                .println("+----------------------------------------------------------------------------------------+");
+        for (Integer id : wordslist.keySet()) {
+            if (id % 5 == 0) {
                 System.out.format("%3s", id.toString());
                 System.out.print(" : ");
                 System.out.format("%-10s", wordslist.get(id));
                 System.out.println();
-            }
-            else{
+            } else {
                 System.out.format("%3s", id.toString());
                 System.out.print(" : ");
                 System.out.format("%-10s", wordslist.get(id));
             }
         }
         System.out.println();
-        System.out.println("+----------------------------------------------------------------------------------------+");
+        System.out
+                .println("+----------------------------------------------------------------------------------------+");
     }
-
 
     public void rec_user() {
         int user_id = Integer.parseInt(scan_command.get_command_data().get("user_id"));
@@ -366,7 +368,8 @@ class test_system_go {
                 if (!all_books.get(book_id).check_has_word(book_setter.get_words_list().get(word_id))) {
                     all_books.get(book_id).set_word(book_setter.get_words_list().get(word_id));
                     db_update.create_sql_add_book_word(book_id, word_id);
-                    System.out.println(all_books.get(book_id).get_book_name()+" : "+"[" + book_setter.get_words_list().get(word_id) + "]" + " added.");
+                    System.out.println(all_books.get(book_id).get_book_name() + " : " + "["
+                            + book_setter.get_words_list().get(word_id) + "]" + " added.");
                     update_book_value();
                 } else {
                     System.out.println("The word is already in this book.");
@@ -379,8 +382,58 @@ class test_system_go {
         }
     }
 
+    public void update_user_name() {
+        int user_id = Integer.parseInt(scan_command.get_command_data().get("user_id"));
+        String user_name = scan_command.get_command_data().get("user_name");
+        if (all_users.containsKey(user_id)) {
+            all_users.get(user_id).update_info(user_id, user_name);
+            db_update.create_sql_update_user_name(user_id, user_name);
+            System.out.println("new Name : "+user_name);
+        }
+        else{
+            System.out.println("Not found user");
+        }
+
+    }
+
+    public void update_user_book_score(){
+        int user_id = Integer.parseInt(scan_command.get_command_data().get("user_id"));
+        int book_id = Integer.parseInt(scan_command.get_command_data().get("book_id"));
+        double score = Double.parseDouble(scan_command.get_command_data().get("score"));
+        if(all_users.containsKey(user_id)){
+            if(all_books.containsKey(book_id)){
+                if(all_users.get(user_id).check_have_book(book_id)){
+                    all_users.get(user_id).update_bookscore(book_id, score);
+                    db_update.create_sql_update_user_book_score(user_id, book_id, score);
+                    update_user_value();
+                    System.out.println("updated.    user_id : "+user_id+"   book_id : "+book_id+"    score : "+score);
+                }
+                else{
+                    System.out.println("user don't evaluated. first, please add score");
+                }
+            }
+            else{
+                System.out.println("Not found book");
+            }
+        }
+        else{
+            System.out.println("Not found user");
+        }
+    }
+
+    public void update_book_name(){
+        int book_id = Integer.parseInt(scan_command.get_command_data().get("book_id"));
+        String book_name = scan_command.get_command_data().get("book_name");
+        if(all_books.containsKey(book_id)){
+            all_books.get(book_id).replace_book_name(book_name);
+            db_update.create_sql_update_book_name(book_id, book_name);
+            System.out.println("updated.  new book name : "+book_name);
+        }
+        else{
+            System.out.println("Not found book");
+        }
+    }
 
 
 
-    
 }
