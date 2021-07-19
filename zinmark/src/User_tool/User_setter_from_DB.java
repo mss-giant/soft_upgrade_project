@@ -66,6 +66,10 @@ public class User_setter_from_DB {
         return this.serial_next_number;
     }
 
+    public void set_next_user_num(){
+        this.serial_next_number++;
+    }
+
     public void connect_and_select_data(String table_name) {
         try (Connection connection = DriverManager.getConnection(url, user, password);) {
             Class.forName("org.postgresql.Driver");

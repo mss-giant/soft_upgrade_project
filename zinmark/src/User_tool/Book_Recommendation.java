@@ -64,6 +64,7 @@ class Book_Recommendation {
                         if(target_user.check_User_friends(u_opponent)){
                             if(u_opponent.check_have_book(b)){
                                 double rec_score = u_opponent.get_bookscore(b) * this.target_user.get_similar_opponent_score(u_opponent);
+                                //if(b==6){System.out.println(u_opponent.get_id() + " : "+u_opponent.get_bookscore(b) + " score : "+rec_score);}
                                 add_rec_book_score(b, rec_score);
                                 add_all_user_similar_score(b, this.target_user.get_similar_opponent_score(u_opponent));
                             }
