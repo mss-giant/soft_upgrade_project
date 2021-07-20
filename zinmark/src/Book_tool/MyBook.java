@@ -124,6 +124,13 @@ public class MyBook implements Comparable<MyBook>{
         return this.referenced_to_me;
     }
 
+    public void delete_reference_book(MyBook refer_book){
+        if(this.reference_book.contains(refer_book)){
+            this.reference_book.remove(refer_book);
+        }
+    }
+
+
 
     public void set_word(String word){
         if(!this.word_list.contains(word)){
@@ -179,5 +186,6 @@ public class MyBook implements Comparable<MyBook>{
             this.referenced_to_me.remove(remove_book);
         }
     }
+
 
 }

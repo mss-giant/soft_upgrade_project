@@ -118,6 +118,10 @@ public class DB_updater {
         update_DB_querys.add(sql);
     }
 
+    public void create_sql_add_book_reference(int book_me,int refer_book){
+        String sql = "INSERT INTO link (source, target) values "+"("+book_me+","+refer_book+");";
+        update_DB_querys.add(sql);
+    }
 
     public void create_sql_update_user_name(int user_id, String new_user_name){
         String sql = "UPDATE user_name set name="+"\'"+new_user_name+"\'"+" where id="+user_id+";";
@@ -164,6 +168,11 @@ public class DB_updater {
         update_DB_querys.add(sql_location);
         update_DB_querys.add(sql_link);
         update_DB_querys.add(sql_score_book);
+    }
+
+    public void create_sql_delete_book_reference(int book_me, int refer_book){
+        String sql = "DELETE FROM link where source="+book_me+" and "+"target="+refer_book+";";
+        update_DB_querys.add(sql);
     }
 
     public void test_disp(){

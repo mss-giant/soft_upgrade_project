@@ -25,6 +25,7 @@ public class Command_Scanner {
     private boolean add_user_friend_call;
     private boolean add_book_call;
     private boolean add_book_word_call;
+    private boolean add_book_reference_call;
 
     private boolean update_user_name_call;
     private boolean update_user_book_score_call; // eval
@@ -32,6 +33,7 @@ public class Command_Scanner {
 
     private boolean delete_user_call;
     private boolean delete_book_call;
+    private boolean delete_book_reference_call;
 
     private boolean search_mode_call;
     private boolean exit_call;
@@ -104,6 +106,7 @@ public class Command_Scanner {
         add_user_friend_call = false;
         add_book_call = false;
         add_book_word_call = false;
+        add_book_reference_call = false;
 
         update_user_name_call = false;
         update_user_book_score_call = false;
@@ -111,6 +114,7 @@ public class Command_Scanner {
 
         delete_user_call = false;
         delete_book_call = false;
+        delete_book_reference_call = false;
 
         search_mode_call = false;
         exit_call = false;
@@ -221,6 +225,15 @@ public class Command_Scanner {
             } else {
                 System.out.println("error : please input integer");
             }
+        } else if (command.length == 5 && command[1].equals("-b") && command[3].equals("-r")){
+            if(command[2].matches("^[0-9]+$") && command[4].matches("^[0-9]+$")) {
+                this.add_book_reference_call = true;
+                command_input_data.put("source", command[2]);
+                command_input_data.put("target", command[4]);
+            }
+            else{
+                System.out.println("error : please input integer");
+            }
         } else {
             System.out.println("syntax error or not found option");
         }
@@ -275,6 +288,15 @@ public class Command_Scanner {
                 this.delete_book_call = true;
                 command_input_data.put("book_id", command[2]);
             } else {
+                System.out.println("error : please input integer");
+            }
+        } else if (command.length == 5 && command[1].equals("-b") && command[3].equals("-r")){
+            if(command[2].matches("^[0-9]+$") && command[4].matches("^[0-9]+$")) {
+                this.delete_book_reference_call = true;
+                command_input_data.put("source", command[2]);
+                command_input_data.put("target", command[4]);
+            }
+            else{
                 System.out.println("error : please input integer");
             }
         } else {
@@ -346,6 +368,10 @@ public class Command_Scanner {
         return this.add_book_word_call;
     }
 
+    public boolean get_add_book_reference_call(){
+        return this.add_book_reference_call;
+    }
+
     // update command
     public boolean get_update_user_name_call() {
         return this.update_user_name_call;
@@ -366,6 +392,10 @@ public class Command_Scanner {
 
     public boolean get_delete_book_call() {
         return this.delete_book_call;
+    }
+
+    public boolean get_delete_book_reference_call(){
+        return this.delete_book_reference_call;
     }
 
     public boolean get_search_mode_call() {
@@ -426,6 +456,9 @@ public class Command_Scanner {
         System.out.printf("%-50s", " add -b [book_id] -w [word_id]");
         System.out.print(" : ");
         System.out.println("add book word");
+        System.out.printf("%-50s", " add -b [book_id] -r [target_id]");
+        System.out.print(" : ");
+        System.out.println("add book reference");
         System.out.printf("%-50s", " update -u [user_id] [new_user_name]");
         System.out.print(" : ");
         System.out.println("update user name");
@@ -441,6 +474,9 @@ public class Command_Scanner {
         System.out.printf("%-50s", " delete -b [book_id]");
         System.out.print(" : ");
         System.out.println("delete book");
+        System.out.printf("%-50s", " delete -b [book_id] -r [target_id]");
+        System.out.print(" : ");
+        System.out.println("delete book reference");
         System.out.printf("%-50s", " search");
         System.out.print(" : ");
         System.out.println("input word and display recommendation book");

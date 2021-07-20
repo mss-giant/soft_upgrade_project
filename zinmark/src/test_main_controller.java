@@ -148,6 +148,9 @@ class test_system_go {
             if (scan_command.get_add_book_word_call()) {
                 add_book_word();
             }
+            if (scan_command.get_add_book_reference_call()){
+                add_book_reference();
+            }
             if (scan_command.get_update_user_name_call()) {
                 update_user_name();
             }
@@ -162,6 +165,9 @@ class test_system_go {
             }
             if (scan_command.get_delete_book_call()) {
                 delete_book();
+            }
+            if (scan_command.get_delete_book_reference_call()) {
+                delete_book_reference();
             }
             if (scan_command.get_search_mode_call()) {
                 System.out.println();
@@ -380,6 +386,26 @@ class test_system_go {
         }
     }
 
+    public void add_book_reference() {
+        int book_id = Integer.parseInt(scan_command.get_command_data().get("source"));
+        int target_id = Integer.parseInt(scan_command.get_command_data().get("target"));
+        if(all_books.containsKey(book_id)){
+            if(!all_books.get(book_id).get_reference_book().contains(all_books.get(target_id))){
+                all_books.get(book_id).set_reference_book(all_books.get(target_id));
+                db_update.create_sql_add_book_reference(book_id, target_id);
+                book_setter.serch_reference_to_me();
+                update_book_value();
+                System.out.println(all_books.get(book_id).get_book_name() + " linked " + all_books.get(target_id).get_my_page());
+            }
+            else{
+                System.out.println("already linked");
+            }
+        }
+        else{
+            System.out.println("Not found book.");
+        }
+    }
+
     public void update_user_name() {
         int user_id = Integer.parseInt(scan_command.get_command_data().get("user_id"));
         String user_name = scan_command.get_command_data().get("user_name");
@@ -456,6 +482,26 @@ class test_system_go {
             update_book_value();
             update_user_value();
             System.out.println("deleted book    book id : "+book_id);
+        }
+        else{
+            System.out.println("Not found book");
+        }
+    }
+
+    public void delete_book_reference(){
+        int book_id = Integer.parseInt(scan_command.get_command_data().get("source"));
+        int target_id = Integer.parseInt(scan_command.get_command_data().get("target"));
+        if(all_books.containsKey(book_id)){
+            if(all_books.get(book_id).get_reference_book().contains(all_books.get(target_id))){
+                all_books.get(book_id).delete_reference_book(all_books.get(target_id));
+                db_update.create_sql_delete_book_reference(book_id, target_id);
+                book_setter.serch_reference_to_me();
+                update_book_value();
+                System.out.println(all_books.get(book_id).get_book_name()+" deleted reference. " + all_books.get(target_id).get_my_page());
+            }
+            else{
+                System.out.println(all_books.get(book_id).get_book_name()+" don't refer "+all_books.get(target_id).get_book_name());
+            }
         }
         else{
             System.out.println("Not found book");
