@@ -19,6 +19,8 @@ public class Command_Scanner {
     private boolean rec_user_call;
     private boolean rec_user_book_call;
     private boolean rec_book_call;
+    private boolean rec_user_nomal_call;
+    private boolean rec_user_book_nomal_call;
 
     private boolean add_user_call;
     private boolean add_user_book_score_call;
@@ -100,6 +102,8 @@ public class Command_Scanner {
         rec_user_call = false;
         rec_user_book_call = false;
         rec_book_call = false;
+        rec_user_nomal_call = false;
+        rec_user_book_nomal_call = false;
 
         add_user_call = false;
         add_user_book_score_call = false;
@@ -174,6 +178,22 @@ public class Command_Scanner {
 
         } else if (command.length == 2 && command[1].equals("-b")) {
             this.rec_book_call = true;
+        } else if (command.length == 4 && command[1].equals("-u") && command[3].equals("off")){
+            if (command[2].matches("^[0-9]+$")) {
+                this.rec_user_nomal_call = true;
+                command_input_data.put("user_id", command[2]);
+            } else {
+                System.out.println("error : please input integer");
+            }
+        } else if (command.length == 6 && command[1].equals("-u") && command[3].equals("-b") && command[5].equals("off")){
+            if(command[2].matches("^[0-9]+$") && command[4].matches("^[0-9]+$")){
+                this.rec_user_book_nomal_call = true;
+                command_input_data.put("user_id", command[2]);
+                command_input_data.put("book_id", command[4]);
+            }
+            else{
+                System.out.println("error : please input integer");
+            }
         } else {
             System.out.println("error : sytax error or not found option");
         }
@@ -347,6 +367,14 @@ public class Command_Scanner {
         return this.rec_book_call;
     }
 
+    public boolean get_rec_user_nomal_call(){
+        return this.rec_user_nomal_call;
+    }
+
+    public boolean get_rec_user_book_nomal_call(){
+        return this.rec_user_book_nomal_call;
+    }
+
     // add command
     public boolean get_add_user_call() {
         return this.add_user_call;
@@ -434,13 +462,19 @@ public class Command_Scanner {
         System.out.println("display all wordId and word");
         System.out.printf("%-50s", " rec -u [user_id]");
         System.out.print(" : ");
-        System.out.println("display recommendation score and all book for user");
+        System.out.println("display recommendation score friend ON");
         System.out.printf("%-50s", " rec -u [user_id] -b [book_id]");
         System.out.print(" : ");
-        System.out.println("display recommendation score for user");
+        System.out.println("display recommendation score for user friend ON");
         System.out.printf("%-50s", " rec -b");
         System.out.print(" : ");
         System.out.println("display recommendation book");
+        System.out.printf("%-50s", " rec -u [user_id] off");
+        System.out.print(" : ");
+        System.out.println("display recommendation score friend OFF");
+        System.out.printf("%-50s", " rec -u [user_id] -b [book_id] off");
+        System.out.print(" : ");
+        System.out.println("display recommendation score for user friend OFF");
         System.out.printf("%-50s", " add -u [user_name]");
         System.out.print(" : ");
         System.out.println("add user");

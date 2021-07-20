@@ -75,6 +75,27 @@ class Book_Recommendation {
         }
     
     }
+    //friend 関係なし
+    public void cal_rec_score_all_user(){
+        for(Integer b : book_ids){
+            if(!target_user.check_have_book(b)){
+                for(User u_opponent : users.values()){
+                    if(!target_user.equals(u_opponent)){
+                        // friend userの時だけ格納
+                        //if(target_user.check_User_friends(u_opponent)){
+                        if(true){
+                            if(u_opponent.check_have_book(b)){
+                                double rec_score = u_opponent.get_bookscore(b) * this.target_user.get_similar_opponent_score(u_opponent);
+                                //if(b==6){System.out.println(u_opponent.get_id() + " : "+u_opponent.get_bookscore(b) + " score : "+rec_score);}
+                                add_rec_book_score(b, rec_score);
+                                add_all_user_similar_score(b, this.target_user.get_similar_opponent_score(u_opponent));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     //推薦度の集計
     public void add_rec_book_score(int booknum,double score){

@@ -133,6 +133,12 @@ class test_system_go {
             if (scan_command.get_rec_book_call()) {
                 rec_book();
             }
+            if (scan_command.get_rec_user_nomal_call()){
+                rec_user_nomal();
+            }
+            if (scan_command.get_rec_user_book_nomal_call()){
+                rec_user_book_nomal();
+            }  
             if (scan_command.get_add_user_call()) {
                 add_user();
             }
@@ -294,6 +300,37 @@ class test_system_go {
 
     public void rec_book() {
         book_only_rec.display();
+    }
+
+    public void rec_user_nomal(){
+        int user_id = Integer.parseInt(scan_command.get_command_data().get("user_id"));
+        if (all_users.containsKey(user_id)) {
+            target_user_id = user_id;
+            user_only_rec.cal_target_rec_book_score_all_user(target_user_id);
+            all_users.get(user_id).disp_rec_book_score_sort();
+            System.out.println(" \n add book score -->>");
+            all_users.get(user_id).disp_add_rec_book_score_sort(all_books);
+        } else {
+            System.out.println("Not found user");
+        }
+    }
+
+    public void rec_user_book_nomal(){
+        int user_id = Integer.parseInt(scan_command.get_command_data().get("user_id"));
+        int book_id = Integer.parseInt(scan_command.get_command_data().get("book_id"));
+        if (all_users.containsKey(user_id)) {
+            if (all_books.containsKey(book_id)) {
+                target_user_id = user_id;
+                user_only_rec.cal_target_rec_book_score_all_user(target_user_id);
+                all_users.get(user_id).disp_rec_book_score(book_id);
+                System.out.println("\n add book score");
+                all_users.get(user_id).disp_add_rec_book_score(book_id, all_books);
+            } else {
+                System.out.println("Not found book");
+            }
+        } else {
+            System.out.println("Not found user");
+        }
     }
 
     public void add_user() {

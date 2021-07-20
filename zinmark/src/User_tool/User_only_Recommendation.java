@@ -83,6 +83,17 @@ public class User_only_Recommendation {
         
     }
 
+    public void cal_target_rec_book_score_all_user(int target_user_id){
+        book_rec = new Book_Recommendation();
+        book_rec.set_users(users);
+        //book_rec.set_number_of_books(number_of_books);
+        //System.out.println("OK");
+        book_rec.set_books(book_ids);
+        book_rec.set_targetuser(users.get(target_user_id));
+        book_rec.cal_rec_score_all_user();
+        users.get(target_user_id).set_rec_book_score(book_rec);
+    }
+
     public void all_display(int target_user_id){
         System.out.println();
         //System.out.print("    Score");
