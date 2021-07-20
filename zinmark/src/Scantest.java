@@ -14,7 +14,7 @@ public class Scantest {
         //データを入れる
         System.out.println("roading.....");
         Scan_data_csvfile scan_file = new Scan_data_csvfile();
-        scan_file.readFolder(new File("/home/gigi/link/soft/upgrade_project_git/zinmark/data"));
+        scan_file.readFolder(new File("/home/gigi/link/soft/upgrade_project_git/zinmark/data2"));
         for(File file : scan_file.get_file_list()){
             ScanCSV_to_SQL scan = new ScanCSV_to_SQL(file);
             //scan.insert_data();
