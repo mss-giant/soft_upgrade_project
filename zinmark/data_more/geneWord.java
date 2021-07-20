@@ -94,9 +94,8 @@ public class geneWord {
       BufferedReader scanline = new BufferedReader(new InputStreamReader(new FileInputStream(scanfile),"UTF-8"));
       String line;
       while((line = scanline.readLine()) != null){
-        if(line.matches("^[a-zA-Z]+$")){
-          data.add(line);
-        }
+        if(line.matches("^[a-zA-Z]+$"))
+        data.add(line);
       }
     } catch (Exception e) {
       //TODO: handle exception
